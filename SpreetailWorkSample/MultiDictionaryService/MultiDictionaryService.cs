@@ -31,7 +31,7 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (_dictionary.Count == 0)
             {
-                ConsoleUtility.WriteLineWithPrefix("empty set");
+                ConsoleUtility.WriteLineWithPrefix(ConsoleUtility.EMPTY_SET);
                 return;
             }
 
@@ -58,7 +58,7 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (_dictionary.Count == 0)
             {
-                ConsoleUtility.WriteLineWithPrefix("empty set");
+                ConsoleUtility.WriteLineWithPrefix(ConsoleUtility.EMPTY_SET);
                 return;
             }
 
@@ -91,7 +91,7 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (_dictionary.Count == 0)
             {
-                ConsoleUtility.WriteLineWithPrefix("empty set");
+                ConsoleUtility.WriteLineWithPrefix(ConsoleUtility.EMPTY_SET);
                 return;
             }
 
@@ -120,7 +120,7 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (!_dictionary.ContainsKey(key))
             {
-                ConsoleUtility.WriteLineWithPrefix("ERROR, key does not exist.");
+                ConsoleUtility.WriteLineWithPrefix(ConsoleUtility.KEY_NOT_EXIST);
                 return;
             }
             int lineNumber = 0;
@@ -137,7 +137,7 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (!_dictionary.ContainsKey(key))
             {
-                ConsoleUtility.WriteLineWithPrefix("ERROR, key does not exist.");
+                ConsoleUtility.WriteLineWithPrefix(ConsoleUtility.KEY_NOT_EXIST);
                 return;
             }
 
@@ -150,13 +150,13 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (!_dictionary.ContainsKey(key))
             {
-                ConsoleUtility.WriteLineWithPrefix("ERROR, key does not exist.");
+                ConsoleUtility.WriteLineWithPrefix(ConsoleUtility.KEY_NOT_EXIST);
                 return;
             }
 
             if (!_dictionary[key].Contains(value))
             {
-                ConsoleUtility.WriteLineWithPrefix("ERROR, member does not exist.");
+                ConsoleUtility.WriteLineWithPrefix(ConsoleUtility.MEMBER_NOT_EXIST);
                 return;
             }
 
