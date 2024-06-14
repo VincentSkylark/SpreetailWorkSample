@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SpreetailWorkSample.Utility;
 
 namespace SpreetailWorkSample.MultiDictionary
 {
@@ -22,12 +18,12 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (_dictionary.ContainsKey(key) && _dictionary[key].Contains(value))
             {
-                Console.WriteLine("ERROR, member already exists for key");
+                ConsoleUtility.WriteLineWithPrefix("ERROR, member already exists for key");
                 return;
             }
             if (!_dictionary.ContainsKey(key)) _dictionary[key] = new HashSet<string>();
             _dictionary[key].Add(value);
-            Console.WriteLine("Added");
+            ConsoleUtility.WriteLineWithPrefix("Added");
             return;
         }
 
@@ -35,7 +31,7 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (_dictionary.Count == 0)
             {
-                Console.WriteLine(") empty set");
+                ConsoleUtility.WriteLineWithPrefix("empty set");
                 return;
             }
 
@@ -45,7 +41,7 @@ namespace SpreetailWorkSample.MultiDictionary
                 foreach (string value in _dictionary[key])
                 {
                     lineNumber++;
-                    Console.WriteLine($"{lineNumber}) {value}");
+                    ConsoleUtility.WriteLineWithPrefix(lineNumber, value);
                 }
             }
             return;
@@ -54,7 +50,7 @@ namespace SpreetailWorkSample.MultiDictionary
         public void Clear()
         {
             _dictionary.Clear();
-            Console.WriteLine(") Cleared");
+            ConsoleUtility.WriteLineWithPrefix("Cleared");
             return;
         }
 
@@ -62,7 +58,7 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (_dictionary.Count == 0)
             {
-                Console.WriteLine(") empty set");
+                ConsoleUtility.WriteLineWithPrefix("empty set");
                 return;
             }
 
@@ -73,7 +69,7 @@ namespace SpreetailWorkSample.MultiDictionary
                 foreach (string value in _dictionary[key])
                 {
                     lineNumber++;
-                    Console.WriteLine($"{lineNumber}) {key}: {value}");
+                    ConsoleUtility.WriteLineWithPrefix(lineNumber, $"{key}: {value}");
                 }
             }
             return;
@@ -83,10 +79,10 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (_dictionary.ContainsKey(key))
             {
-                Console.WriteLine("true");
+                ConsoleUtility.WriteLineWithPrefix("true");
                 return;
             }
-            Console.WriteLine("false");
+            ConsoleUtility.WriteLineWithPrefix("false");
             return;
 
         }
@@ -95,7 +91,7 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (_dictionary.Count == 0)
             {
-                Console.WriteLine(") empty set");
+                ConsoleUtility.WriteLineWithPrefix("empty set");
                 return;
             }
 
@@ -104,7 +100,7 @@ namespace SpreetailWorkSample.MultiDictionary
             foreach (string key in _dictionary.Keys)
             {
                 lineNumber++;
-                Console.WriteLine($"{lineNumber}) {key}");
+                ConsoleUtility.WriteLineWithPrefix(lineNumber, $"{key}");
             }
             return;
         }
@@ -113,10 +109,10 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (!_dictionary.ContainsKey(key) || !_dictionary[key].Contains(member))
             {
-                Console.WriteLine("false");
+                ConsoleUtility.WriteLineWithPrefix("false");
                 return;
             }
-            Console.WriteLine("true");
+            ConsoleUtility.WriteLineWithPrefix("true");
             return;
         }
 
@@ -124,7 +120,7 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (!_dictionary.ContainsKey(key))
             {
-                Console.WriteLine(") ERROR, key does not exist.");
+                ConsoleUtility.WriteLineWithPrefix("ERROR, key does not exist.");
                 return;
             }
             int lineNumber = 0;
@@ -132,7 +128,7 @@ namespace SpreetailWorkSample.MultiDictionary
             foreach (string member in _dictionary[key])
             {
                 lineNumber++;
-                Console.WriteLine($"{lineNumber}) {member}");
+                ConsoleUtility.WriteLineWithPrefix(lineNumber, $"{member}");
             }
             return;
         }
@@ -141,12 +137,12 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (!_dictionary.ContainsKey(key))
             {
-                Console.WriteLine(") ERROR, key does not exist.");
+                ConsoleUtility.WriteLineWithPrefix("ERROR, key does not exist.");
                 return;
             }
 
             _dictionary.Remove(key);
-            Console.WriteLine(") Removed");
+            ConsoleUtility.WriteLineWithPrefix("Removed");
             return;
         }
 
@@ -154,19 +150,19 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (!_dictionary.ContainsKey(key))
             {
-                Console.WriteLine(") ERROR, key does not exist.");
+                ConsoleUtility.WriteLineWithPrefix("ERROR, key does not exist.");
                 return;
             }
 
             if (!_dictionary[key].Contains(value))
             {
-                Console.WriteLine(") ERROR, member does not exist.");
+                ConsoleUtility.WriteLineWithPrefix("ERROR, member does not exist.");
                 return;
             }
 
             _dictionary[key].Remove(value);
             if (_dictionary[key].Count == 0) _dictionary.Remove(key);
-            Console.WriteLine(") Removed");
+            ConsoleUtility.WriteLineWithPrefix("Removed");
             return;
 
         }

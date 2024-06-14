@@ -1,16 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
+using System;
 
 namespace SpreetailWorkSample.Utility
 {
     public static class ConsoleUtility
     {
-        public static void InvalidArguments(int argsLength)
+        public static string ReadWithPrefix()
         {
-            Console.WriteLine($"Invalid number of arguments. Expected {argsLength} {(argsLength > 1 ? "arguments" : "argument")}");
+            Console.Write("> ");
+            return Console.ReadLine().Trim();
+        }
+
+        public static void WriteLineWithPrefix(string message)
+        {
+            Console.WriteLine($") {message}");
+        }
+
+        public static void WriteLineWithPrefix(int lineNumber, string message)
+        {
+            Console.WriteLine($"{lineNumber}) {message}");
         }
     }
 }

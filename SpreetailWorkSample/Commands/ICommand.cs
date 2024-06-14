@@ -1,11 +1,4 @@
-﻿using SpreetailWorkSample.MultiDictionary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpreetailWorkSample.Commands
+﻿namespace SpreetailWorkSample.Commands
 {
     public interface ICommand
     {

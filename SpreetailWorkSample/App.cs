@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SpreetailWorkSample.Commands;
+﻿using SpreetailWorkSample.Commands;
+using SpreetailWorkSample.Utility;
 
 namespace SpreetailWorkSample
 {
@@ -19,7 +15,7 @@ namespace SpreetailWorkSample
         {
             while (true)
             {
-                var input = Console.ReadLine().Trim();
+                var input = ConsoleUtility.ReadWithPrefix();
 
                 if (input.Equals("exit", StringComparison.OrdinalIgnoreCase))
                 {
@@ -38,12 +34,12 @@ namespace SpreetailWorkSample
                     }
                     else
                     {
-                        Console.WriteLine("Invalid command");
+                        ConsoleUtility.WriteLineWithPrefix("Invalid command");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("No command entered");
+                    ConsoleUtility.WriteLineWithPrefix("No command entered");
                 }
             }
         }

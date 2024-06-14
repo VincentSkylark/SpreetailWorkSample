@@ -1,31 +1,17 @@
 ﻿using SpreetailWorkSample.MultiDictionary;
 using SpreetailWorkSample.Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpreetailWorkSample.Commands
 {
-    internal class KeysCommand : ICommand
+    internal class KeysCommand : BaseCommand
     {
         private readonly IMultiDictionaryService _multiDictionaryService;
 
-        public KeysCommand(IMultiDictionaryService service)
+        public KeysCommand(IMultiDictionaryService service) : base(service.Keys)
         {
             _multiDictionaryService = service;
         }
-        public void Execute(string?[] args)
-        {
-            if (args != null && args.Length > 0)
-            {
-                ConsoleUtility.InvalidArguments(0);
-                return;
-            }
 
-            _multiDictionaryService.Keys();
-        }
 
     }
 }
