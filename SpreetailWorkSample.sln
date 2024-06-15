@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreetailTestProject", "SpreetailTestProject\SpreetailTestProject.csproj", "{F2722BD2-005F-45A9-8709-0B10F3C0916B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{92D209DB-4A7C-4D8E-916C-FD0E36A20EAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92D209DB-4A7C-4D8E-916C-FD0E36A20EAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92D209DB-4A7C-4D8E-916C-FD0E36A20EAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2722BD2-005F-45A9-8709-0B10F3C0916B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2722BD2-005F-45A9-8709-0B10F3C0916B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2722BD2-005F-45A9-8709-0B10F3C0916B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2722BD2-005F-45A9-8709-0B10F3C0916B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

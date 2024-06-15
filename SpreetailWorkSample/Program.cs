@@ -24,7 +24,15 @@ namespace SpreetailWorkSample
             };
 
             var app = new App(commands);
-            app.Run();
+
+            try
+            {
+                app.Run();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

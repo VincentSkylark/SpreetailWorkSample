@@ -8,22 +8,29 @@ namespace SpreetailWorkSample.MultiDictionary
         public static MultiDictionaryService Instance => _instance.Value;
 
         private Dictionary<string, HashSet<string>> _dictionary;
-
+        private readonly IConsoleHelper _consoleHelper;
         public MultiDictionaryService()
         {
             _dictionary = new Dictionary<string, HashSet<string>>();
+            _consoleHelper = new ConsoleHelper();
+        }
+
+        public MultiDictionaryService(IConsoleHelper consoleHelper)
+        {
+            _dictionary = new Dictionary<string, HashSet<string>>();
+            _consoleHelper = consoleHelper;
         }
 
         public void Add(string key, string value)
         {
             if (_dictionary.ContainsKey(key) && _dictionary[key].Contains(value))
             {
-                ConsoleUtility.WriteLineWithPrefix("ERROR, member already exists for key");
+                _consoleHelper.WriteLineWithPrefix("ERROR, member already exists for key");
                 return;
             }
             if (!_dictionary.ContainsKey(key)) _dictionary[key] = new HashSet<string>();
             _dictionary[key].Add(value);
-            ConsoleUtility.WriteLineWithPrefix("Added");
+            _consoleHelper.WriteLineWithPrefix("Added");
             return;
         }
 
@@ -31,7 +38,7 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (_dictionary.Count == 0)
             {
-                ConsoleUtility.WriteLineWithPrefix(ConsoleUtility.EMPTY_SET);
+                _consoleHelper.WriteLineWithPrefix(Constant.EMPTY_SET);
                 return;
             }
 
@@ -41,7 +48,7 @@ namespace SpreetailWorkSample.MultiDictionary
                 foreach (string value in _dictionary[key])
                 {
                     lineNumber++;
-                    ConsoleUtility.WriteLineWithPrefix(lineNumber, value);
+                    _consoleHelper.WriteLineWithPrefix(lineNumber, value);
                 }
             }
             return;
@@ -50,7 +57,7 @@ namespace SpreetailWorkSample.MultiDictionary
         public void Clear()
         {
             _dictionary.Clear();
-            ConsoleUtility.WriteLineWithPrefix("Cleared");
+            _consoleHelper.WriteLineWithPrefix("Cleared");
             return;
         }
 
@@ -58,7 +65,7 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (_dictionary.Count == 0)
             {
-                ConsoleUtility.WriteLineWithPrefix(ConsoleUtility.EMPTY_SET);
+                _consoleHelper.WriteLineWithPrefix(Constant.EMPTY_SET);
                 return;
             }
 
@@ -69,7 +76,7 @@ namespace SpreetailWorkSample.MultiDictionary
                 foreach (string value in _dictionary[key])
                 {
                     lineNumber++;
-                    ConsoleUtility.WriteLineWithPrefix(lineNumber, $"{key}: {value}");
+                    _consoleHelper.WriteLineWithPrefix(lineNumber, $"{key}: {value}");
                 }
             }
             return;
@@ -79,10 +86,10 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (_dictionary.ContainsKey(key))
             {
-                ConsoleUtility.WriteLineWithPrefix("true");
+                _consoleHelper.WriteLineWithPrefix("true");
                 return;
             }
-            ConsoleUtility.WriteLineWithPrefix("false");
+            _consoleHelper.WriteLineWithPrefix("false");
             return;
 
         }
@@ -91,7 +98,7 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (_dictionary.Count == 0)
             {
-                ConsoleUtility.WriteLineWithPrefix(ConsoleUtility.EMPTY_SET);
+                _consoleHelper.WriteLineWithPrefix(Constant.EMPTY_SET);
                 return;
             }
 
@@ -100,7 +107,7 @@ namespace SpreetailWorkSample.MultiDictionary
             foreach (string key in _dictionary.Keys)
             {
                 lineNumber++;
-                ConsoleUtility.WriteLineWithPrefix(lineNumber, $"{key}");
+                _consoleHelper.WriteLineWithPrefix(lineNumber, $"{key}");
             }
             return;
         }
@@ -109,10 +116,10 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (!_dictionary.ContainsKey(key) || !_dictionary[key].Contains(member))
             {
-                ConsoleUtility.WriteLineWithPrefix("false");
+                _consoleHelper.WriteLineWithPrefix("false");
                 return;
             }
-            ConsoleUtility.WriteLineWithPrefix("true");
+            _consoleHelper.WriteLineWithPrefix("true");
             return;
         }
 
@@ -120,7 +127,7 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (!_dictionary.ContainsKey(key))
             {
-                ConsoleUtility.WriteLineWithPrefix(ConsoleUtility.KEY_NOT_EXIST);
+                _consoleHelper.WriteLineWithPrefix(Constant.KEY_NOT_EXIST);
                 return;
             }
             int lineNumber = 0;
@@ -128,7 +135,7 @@ namespace SpreetailWorkSample.MultiDictionary
             foreach (string member in _dictionary[key])
             {
                 lineNumber++;
-                ConsoleUtility.WriteLineWithPrefix(lineNumber, $"{member}");
+                _consoleHelper.WriteLineWithPrefix(lineNumber, $"{member}");
             }
             return;
         }
@@ -137,12 +144,12 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (!_dictionary.ContainsKey(key))
             {
-                ConsoleUtility.WriteLineWithPrefix(ConsoleUtility.KEY_NOT_EXIST);
+                _consoleHelper.WriteLineWithPrefix(Constant.KEY_NOT_EXIST);
                 return;
             }
 
             _dictionary.Remove(key);
-            ConsoleUtility.WriteLineWithPrefix("Removed");
+            _consoleHelper.WriteLineWithPrefix("Removed");
             return;
         }
 
@@ -150,19 +157,19 @@ namespace SpreetailWorkSample.MultiDictionary
         {
             if (!_dictionary.ContainsKey(key))
             {
-                ConsoleUtility.WriteLineWithPrefix(ConsoleUtility.KEY_NOT_EXIST);
+                _consoleHelper.WriteLineWithPrefix(Constant.KEY_NOT_EXIST);
                 return;
             }
 
             if (!_dictionary[key].Contains(value))
             {
-                ConsoleUtility.WriteLineWithPrefix(ConsoleUtility.MEMBER_NOT_EXIST);
+                _consoleHelper.WriteLineWithPrefix(Constant.MEMBER_NOT_EXIST);
                 return;
             }
 
             _dictionary[key].Remove(value);
             if (_dictionary[key].Count == 0) _dictionary.Remove(key);
-            ConsoleUtility.WriteLineWithPrefix("Removed");
+            _consoleHelper.WriteLineWithPrefix("Removed");
             return;
 
         }

@@ -3,19 +3,21 @@ using System.Reflection;
 
 namespace SpreetailWorkSample.Commands
 {
-    internal class BaseCommand : ICommand
+    public class BaseCommand : ICommand
     {
         private readonly Delegate _method;
+        private readonly IConsoleHelper _consoleHelper;
 
         public BaseCommand(Delegate method)
         {
             _method = method;
+            _consoleHelper = new ConsoleHelper();
         }
         public void Execute(string?[] args)
         {
             if (_method == null)
             {
-                ConsoleUtility.WriteLineWithPrefix("Method does not exist");
+                _consoleHelper.WriteLineWithPrefix("Method does not exist");
                 return;
             }
 
@@ -28,11 +30,11 @@ namespace SpreetailWorkSample.Commands
             {
                 if (parameters.Length == 0)
                 {
-                    ConsoleUtility.WriteLineWithPrefix($"Invalid usage of {methodInfo.Name} command. No arguments expected.");
+                    _consoleHelper.WriteLineWithPrefix($"Invalid usage of {methodInfo.Name} command. No arguments expected.");
                 }
                 else
                 {
-                    ConsoleUtility.WriteLineWithPrefix($"Invalid usage of {methodInfo.Name} command. {parameters.Length} {(parameters.Length > 1 ? "arguments" : "argument")} expected.");
+                    _consoleHelper.WriteLineWithPrefix($"Invalid usage of {methodInfo.Name} command. {parameters.Length} {(parameters.Length > 1 ? "arguments" : "argument")} expected.");
                 }
                 return;
             }
@@ -43,9 +45,23 @@ namespace SpreetailWorkSample.Commands
             }
             catch (Exception ex)
             {
-                ConsoleUtility.WriteLineWithPrefix($"Unexpected error happened: {ex.Message}");
+                _consoleHelper.WriteLineWithPrefix($"Unexpected error happened: {ex.Message}");
             }
 
+            return;
+        }
+
+        public void Helper()
+        {
+            if (_method == null)
+            {
+                _consoleHelper.WriteLineWithPrefix("Method does not exist");
+                return;
+            }
+
+            MethodInfo methodInfo = _method!.GetMethodInfo();
+            ParameterInfo[] parameters = methodInfo.GetParameters();
+            _consoleHelper.WriteLineWithPrefix($"{methodInfo.Name} method takes {parameters.Length} {(parameters.Length > 1 ? "arguments" : "argument")}");
             return;
         }
     }

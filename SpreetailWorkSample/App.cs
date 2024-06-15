@@ -6,20 +6,38 @@ namespace SpreetailWorkSample
     public class App
     {
         private readonly Dictionary<string, ICommand> _commands;
+        private readonly IConsoleHelper _consoleHelper;
         public App(Dictionary<string, ICommand> commands)
         {
             _commands = commands;
+            _consoleHelper = new ConsoleHelper();
+        }
+
+        public App(Dictionary<string, ICommand> commands, IConsoleHelper consoleHelper)
+        {
+            _commands = commands;
+            _consoleHelper = consoleHelper;
         }
 
         public void Run()
         {
             while (true)
             {
-                var input = ConsoleUtility.ReadWithPrefix();
+                var input = _consoleHelper.ReadWithPrefix();
 
                 if (input.Equals("exit", StringComparison.OrdinalIgnoreCase))
                 {
+                    _consoleHelper.WriteLineWithPrefix("Exiting...");
                     break;
+                }
+
+                if (input.Equals("help", StringComparison.OrdinalIgnoreCase))
+                {
+                    foreach (var command in _commands)
+                    {
+                        command.Value.Helper();
+                    }
+                    continue;
                 }
 
                 var parts = input.Split(' ');
@@ -34,12 +52,13 @@ namespace SpreetailWorkSample
                     }
                     else
                     {
-                        ConsoleUtility.WriteLineWithPrefix("Invalid command");
+                        if (!string.IsNullOrEmpty(commandName))
+                            _consoleHelper.WriteLineWithPrefix("Invalid command, use 'help' command to see the list of avaliable methods.");
                     }
                 }
                 else
                 {
-                    ConsoleUtility.WriteLineWithPrefix("No command entered");
+                    _consoleHelper.WriteLineWithPrefix("No command entered");
                 }
             }
         }
