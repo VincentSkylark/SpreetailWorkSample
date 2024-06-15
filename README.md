@@ -19,10 +19,15 @@ run command:
 ```
 dotnet run --project SpreetailWorkSample
 ```
+### Prebuilt x64 Release
+A prebuilt x64 release of the application is available in the repository under the releases section. You can download it directly and run it without building the source code:
 
-**A prebuilt executable for x64 has been published and included in the `publish` directory.**
+- Navigate to the Releases section of the repository
+- Download the SpreetailWorkSample_1_0_0_x64.zip binary
+- Extract the contents
+- Execute SpreetailWorkSample.exe
 
-## Feature
+## Commands
 
 | Command      | Description                                                            | Example              | Expected Output |
 | ------------ | ---------------------------------------------------------------------- | -------------------- | --------------- |
@@ -36,3 +41,5 @@ dotnet run --project SpreetailWorkSample
 | MEMBERS      | Returns the collection of members in a key.                            | MEMBERS foo          | bar             |
 | REMOVEALL    | Removes all members for a key and removes the key from the dictionary. | REMOVEALL foo        | Removed         |
 | REMOVE       | Removes a member from a key.                                           | REMOVE foo bar       | Removed         |
+| HELP         | Returns a list of available commands.                                  | HELP                 | ADD method ...  |
+| EXIT         | Exits the application.                                                 | EXIT                 | Existing...     |
