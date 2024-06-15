@@ -4,20 +4,21 @@ namespace SpreetailWorkSample.Utility
 
     public class ConsoleHelper : IConsoleHelper
     {
-        public virtual string ReadWithPrefix()
+        public string ReadWithPrefix()
         {
-            return ConsoleUtility.ReadWithPrefix();
+            Console.Write("> ");
+            return Console.ReadLine()?.Trim() ?? "exit";
         }
 
-        public virtual void WriteLineWithPrefix(string message)
+        public void WriteLineWithPrefix(string message)
         {
-            ConsoleUtility.WriteLineWithPrefix(message);
+            Console.WriteLine($") {message}");
             return;
         }
 
-        public virtual void WriteLineWithPrefix(int lineNumber, string message)
+        public void WriteLineWithPrefix(int lineNumber, string message)
         {
-            ConsoleUtility.WriteLineWithPrefix(lineNumber, message);
+            Console.WriteLine($"{lineNumber}) {message}");
             return;
         }
     }

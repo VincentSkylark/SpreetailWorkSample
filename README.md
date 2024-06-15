@@ -8,7 +8,7 @@ This is an interactive console application written in C# as part of Spreetail's 
 To build and deploy the application, you need to have the .NET Core SDK installed on your machine. You can download the SDK from the official .NET website [here](https://dotnet.microsoft.com/download).
 
 
-To build and run the application, follow the steps below, you can also use Visual Studio:
+### Steps to Build and Run the Application:
 
 build command:
 ```
@@ -19,6 +19,8 @@ run command:
 ```
 dotnet run --project SpreetailWorkSample
 ```
+
+**A prebuilt executable for x64 has been published and included in the `publish` directory.**
 
 ## Feature
 
