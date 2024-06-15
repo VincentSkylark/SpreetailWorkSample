@@ -19,6 +19,25 @@ run command:
 ```
 dotnet run --project SpreetailWorkSample
 ```
+
+test command
+```
+dotnet test
+```
+
+### Building and Running the Application in Visual Studio
+
+1. Open Visual Studio.
+   - Go to File > Open > Project/Solution and open the SpreetailWorkSample.sln.
+2. Build the Solution
+3. Run the Application
+   - Ensure SpreetailWorkSample is set as the startup project (right-click on the project and select Set as StartUp Project).
+   - Press F5 or click the Start button to run the application.
+
+### Running the Test Project
+A test project `SpreetailTestProject` is included in the solution. You can run and review each test case via the Test Explorer.
+
+
 ### Prebuilt x64 Release
 A prebuilt x64 release of the application is available in the repository under the releases section. You can download it directly and run it without building the source code:
 
@@ -26,6 +45,8 @@ A prebuilt x64 release of the application is available in the repository under t
 - Download the SpreetailWorkSample_1_0_0_x64.zip binary
 - Extract the contents
 - Execute SpreetailWorkSample.exe
+
+
 
 ## Commands
 
