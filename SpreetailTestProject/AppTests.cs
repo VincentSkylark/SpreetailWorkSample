@@ -50,7 +50,7 @@ namespace SpreetailTestProject
 
             thread.Start();
 
-            bool exited = exitEvent.Wait(1000);
+            exitEvent.Wait(1000);
             consoleHelperMock.Verify(ch => ch.WriteLineWithPrefix("Exiting..."), Times.Once);
         }
 
