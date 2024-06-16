@@ -67,7 +67,7 @@ namespace SpreetailTestProject
 
             var app = new App(commands, consoleHelperMock.Object);
 
-            var exitEvent = new ManualResetEventSlim(false);
+            var writeEvent = new ManualResetEventSlim(false);
 
 
             var thread = new Thread(() => app.Run());
@@ -79,13 +79,13 @@ namespace SpreetailTestProject
 
             consoleHelperMock
                 .Setup(ch => ch.WriteLineWithPrefix(It.IsAny<string>()))
-                .Callback(() => exitEvent.Set());
+                .Callback(() => writeEvent.Set());
 
             using (var output = new StringWriter())
             {
                 Console.SetOut(output);
                 thread.Start();
-                exitEvent.Wait(1000);
+                writeEvent.Wait(1000);
                 string[] lines = output.ToString().Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
                 Assert.Contains("MockMultiDictionaryService Add called", lines[0]);
                 Assert.Contains("Invalid usage of Add command. 2 arguments expected.", lines[1]);
