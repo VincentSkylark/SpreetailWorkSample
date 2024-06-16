@@ -43,8 +43,11 @@ namespace SpreetailWorkSample.Commands
             {
                 _method.DynamicInvoke(args);
             }
-            catch (Exception ex)
+            catch (TargetInvocationException invocationEx)
             {
+                _consoleHelper.WriteLineWithPrefix($"{invocationEx?.InnerException?.Message}");
+            }
+            catch (Exception ex) {
                 _consoleHelper.WriteLineWithPrefix($"Unexpected error happened: {ex.Message}");
             }
 
