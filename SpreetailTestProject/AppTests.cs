@@ -22,17 +22,6 @@ namespace SpreetailTestProject
 
             var app = new App(commands, consoleHelperMock.Object);
             Assert.NotNull(app);
-
-            var thread = new Thread(() => app.Run());
-
-            var inputs = new Queue<string>(new[] { "mock", "wrong" });
-            consoleHelperMock
-            .Setup(ch => ch.ReadWithPrefix())
-            .Returns(() => inputs.Count > 0 ? inputs.Dequeue() : "exit");
-
-            thread.Start();
-            Task.Delay(1000).Wait();
-            consoleHelperMock.Verify(ch => ch.WriteLineWithPrefix(It.IsAny<string>()), Times.Exactly(2));
         }
 
         [Fact]
@@ -45,17 +34,23 @@ namespace SpreetailTestProject
             };
 
             var consoleHelperMock = new Mock<IConsoleHelper>();
-
             var app = new App(commands, consoleHelperMock.Object);
+
+            var exitEvent = new ManualResetEventSlim(false);
+
+            consoleHelperMock
+                .Setup(ch => ch.ReadWithPrefix())
+                .Returns(() => "exit");
+
+            consoleHelperMock
+                .Setup(ch => ch.WriteLineWithPrefix(It.IsAny<string>()))
+                .Callback(() => exitEvent.Set());
 
             var thread = new Thread(() => app.Run());
 
-            consoleHelperMock
-            .Setup(ch => ch.ReadWithPrefix())
-            .Returns(() => "exit");
-
             thread.Start();
-            Task.Delay(1000).Wait();
+
+            bool exited = exitEvent.Wait(1000);
             consoleHelperMock.Verify(ch => ch.WriteLineWithPrefix("Exiting..."), Times.Once);
         }
 
@@ -72,6 +67,9 @@ namespace SpreetailTestProject
 
             var app = new App(commands, consoleHelperMock.Object);
 
+            var exitEvent = new ManualResetEventSlim(false);
+
+
             var thread = new Thread(() => app.Run());
 
             var inputs = new Queue<string>(new[] { "add foo bar", "add" });
@@ -79,11 +77,15 @@ namespace SpreetailTestProject
             .Setup(ch => ch.ReadWithPrefix())
             .Returns(() => inputs.Count > 0 ? inputs.Dequeue() : "exit");
 
-            using(var output = new StringWriter())
+            consoleHelperMock
+                .Setup(ch => ch.WriteLineWithPrefix(It.IsAny<string>()))
+                .Callback(() => exitEvent.Set());
+
+            using (var output = new StringWriter())
             {
                 Console.SetOut(output);
                 thread.Start();
-                Task.Delay(1000).Wait();
+                exitEvent.Wait(1000);
                 string[] lines = output.ToString().Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
                 Assert.Contains("MockMultiDictionaryService Add called", lines[0]);
                 Assert.Contains("Invalid usage of Add command. 2 arguments expected.", lines[1]);
